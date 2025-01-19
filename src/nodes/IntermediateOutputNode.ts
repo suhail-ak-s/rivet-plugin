@@ -4,7 +4,6 @@ import type {
   Inputs,
   InternalProcessContext,
   NodeBodySpec,
-  NodeConnection,
   NodeId,
   NodeInputDefinition,
   NodeOutputDefinition,
@@ -12,11 +11,10 @@ import type {
   Outputs,
   PluginNodeImpl,
   PortId,
-  Project,
   Rivet
 } from "@ironclad/rivet-core";
 
-export type IntermediateOutputNode = ChartNode<"intermediateOutput", IntermediateOutputNodeData>;
+export type IntermediateOutputNode = ChartNode<"intermediate-output", IntermediateOutputNodeData>;
 
 export type IntermediateOutputNodeData = {
   inputText: string;
@@ -29,7 +27,7 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
     create(): IntermediateOutputNode {
       return {
         id: rivet.newId<NodeId>(),
-        type: "intermediateOutput",
+        type: "intermediate-output",
         title: "Intermediate Output",
         data: {
           inputText: "",
@@ -44,27 +42,24 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
       };
     },
 
-    getInputDefinitions(data, _connections, _nodes, _project) {
+    getInputDefinitions(data): NodeInputDefinition[] {
       const inputs: NodeInputDefinition[] = [];
-      if (data.useInput) {
-        inputs.push({
-          id: "input" as PortId,
-          dataType: "string",
-          title: "Input"
-        });
-      }
+      inputs.push({
+        id: "input" as PortId,
+        title: "Input",
+        dataType: "string",
+        required: false
+      });
       return inputs;
     },
 
-    getOutputDefinitions(data, _connections, _nodes, _project) {
+    getOutputDefinitions(data): NodeOutputDefinition[] {
       const outputs: NodeOutputDefinition[] = [];
-      if (data.useInput) {
-        outputs.push({
-          id: "output" as PortId,
-          dataType: "string",
-          title: "Output"
-        });
-      }
+      outputs.push({
+        id: "output" as PortId,
+        title: "Output",
+        dataType: "string"
+      });
       return outputs;
     },
 
@@ -77,44 +72,44 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
       };
     },
 
-    getEditors(data): EditorDefinition<IntermediateOutputNode>[] {
+    getEditors(): EditorDefinition<IntermediateOutputNode>[] {
       return [
         {
           type: "string",
-          dataKey: "inputText",
-          useInputToggleDataKey: "useInput",
-          label: "Default Text"
-        },
-        {
-          type: "string",
           dataKey: "description",
-          label: "Description"
+          label: "Description (document what this output captures)"
         }
       ];
     },
 
     getBody(data): string | NodeBodySpec | NodeBodySpec[] | undefined {
-      return rivet.dedent`
-        Intermediate Output
-        ${data.description ? `Description: ${data.description}` : ''}
-        Current Value: ${data.useInput ? "(Using Input)" : data.inputText}
-      `;
+      const description = data.description ? `Description: ${data.description}` : '';
+      const value = data.inputText ? `Value: ${data.inputText}` : '';
+      return [description, value].filter(Boolean).join('\n');
     },
 
     async process(
       data: IntermediateOutputNodeData,
       inputData: Inputs,
-      _context: InternalProcessContext
+      context: InternalProcessContext
     ): Promise<Outputs> {
+      const inputPort = "input" as PortId;
+      const outputPort = "output" as PortId;
+      const input = (inputData[inputPort]?.value as string) ?? data.inputText;
+      
+      // Use context's partial output instead of console.log
+      const partialOutputs: Outputs = {};
+      partialOutputs[outputPort] = {
+        type: "string",
+        value: input
+      };
+      context.onPartialOutputs?.(partialOutputs);
+
       const outputs: Outputs = {};
-      if (data.useInput) {
-        const input = inputData["input" as PortId];
-        const val = input?.value as string ?? data.inputText;
-        outputs["output" as PortId] = {
-          type: "string",
-          value: val
-        };
-      }
+      outputs[outputPort] = {
+        type: "string",
+        value: input
+      };
       return outputs;
     }
   };

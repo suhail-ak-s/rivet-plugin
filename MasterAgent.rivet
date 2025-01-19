@@ -1,0 +1,43 @@
+version: 4
+data:
+  attachedData:
+    trivet:
+      testSuites: []
+      version: 1
+  graphs:
+    jZDbKoqXeqOgJo1EhumeF:
+      metadata:
+        description: ""
+        id: jZDbKoqXeqOgJo1EhumeF
+        name: Untitled Graph
+      nodes:
+        '[0f0gHpRg7dMqWCZhu72tg]:graphOutput "Graph Output"':
+          data:
+            dataType: string
+            id: output
+          visualData: 1032/466/330/null//
+        '[hZiaPiLBkQybX-wQG2NKd]:intermediate-output "Intermediate Output"':
+          data:
+            description: Captures intermediate output for debugging or analysis
+            inputText: ""
+            useInput: true
+          visualData: 657/686/270/null//
+        '[zMtcVap6NISx4LW8nQsZA]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            defaultValue: Suhail
+            id: input
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Graph Output" 0f0gHpRg7dMqWCZhu72tg/value
+            - data->"Intermediate Output" hZiaPiLBkQybX-wQG2NKd/input
+          visualData: 474/409/330/null//
+  metadata:
+    description: ""
+    id: E0WcQ1ErDiPsiqzdnSlIh
+    title: suhail
+  plugins:
+    - id: rivet-intermediate-output@latest
+      package: rivet-intermediate-output
+      tag: latest
+      type: package

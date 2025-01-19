@@ -1,25 +1,35 @@
 {
   "name": "rivet-intermediate-output",
-  "packageManager": "yarn@3.5.0",
-  "version": "0.0.1",
+  "version": "0.0.5",
+  "description": "A Rivet plugin for capturing and displaying intermediate outputs for debugging and analysis",
   "type": "module",
   "main": "dist/bundle.js",
-  "description": "A Rivet plugin for capturing and displaying intermediate outputs for debugging and analysis",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "author": {
     "name": "Suhail Ak",
-    "url": "https://github.com/suhail"
+    "url": "https://github.com/suhail-ak-s"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/suhail/rivet-intermediate-output"
+    "url": "https://github.com/suhail-ak-s/rivet-plugin.git"
   },
-  "private": true,
-  "workspaces": [
-    "."
-  ],
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "rivet",
+    "rivet-plugin",
+    "debug",
+    "intermediate-output",
+    "development-tools",
+    "node",
+    "nodejs"
   ],
   "scripts": {
     "build": "tsc -b && tsx bundle.ts",
@@ -27,23 +37,26 @@
     "watch:tsc": "tsc -b -w --preserveWatchOutput",
     "watch:esbuild": "tsx bundle.ts --watch",
     "watch:esbuild:sync": "tsx bundle.ts --watch --sync",
-    "publish": "yarn npm publish --access public",
-    "test": "jest"
+    "prepublishOnly": "yarn build",
+    "publish:npm": "npm publish --access public"
   },
   "dependencies": {
-    "@ironclad/rivet-core": "^1.4.0"
+    "@ironclad/rivet-core": "^1.20.1",
+    "@ironclad/rivet-node": "^1.20.1",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@types/jest": "^29.5.0",
-    "esbuild": "^0.19.2",
-    "jest": "^29.5.0",
+    "@types/jest": "^29.5.14",
+    "esbuild": "^0.24.2",
+    "jest": "^29.7.0",
     "npm-run-all": "^4.1.5",
     "recursive-copy": "^2.0.14",
-    "ts-jest": "^29.1.0",
-    "tsx": "^3.12.10",
-    "typescript": "^5.2.2"
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
   },
+  "packageManager": "yarn@3.5.0",
   "volta": {
     "node": "20.6.1"
   },

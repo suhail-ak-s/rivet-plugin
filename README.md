@@ -2,7 +2,7 @@
 
 A debugging utility plugin for Rivet that helps you analyze data flow in your graphs by capturing and displaying intermediate outputs.
 
-[![Author: Suhail Ak](https://img.shields.io/badge/Author-Suhail%20Ak-blue.svg)](https://github.com/suhail)
+[![Author: Suhail Ak](https://img.shields.io/badge/Author-Suhail%20Ak-blue.svg)](https://github.com/suhail-ak-s)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## Overview
@@ -44,7 +44,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Author
 
 **Suhail Ak**
-- GitHub: [@suhail](https://github.com/suhail)
+- GitHub: [@suhail-ak-s](https://github.com/suhail-ak-s)
 
 ## License
 
