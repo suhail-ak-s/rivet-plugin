@@ -5,37 +5,37 @@ data:
       testSuites: []
       version: 1
   graphs:
-    jZDbKoqXeqOgJo1EhumeF:
+    qlSqPyEleqPj8D9pcfIAJ:
       metadata:
         description: ""
-        id: jZDbKoqXeqOgJo1EhumeF
+        id: qlSqPyEleqPj8D9pcfIAJ
         name: Untitled Graph
       nodes:
-        '[0f0gHpRg7dMqWCZhu72tg]:graphOutput "Graph Output"':
-          data:
-            dataType: string
-            id: output
-          visualData: 1032/466/330/null//
-        '[hZiaPiLBkQybX-wQG2NKd]:intermediate-output "Intermediate Output"':
+        '[3ObTy2HSSd5soe7fEP6lF]:intermediate-output "Intermediate Output"':
           data:
             description: Captures intermediate output for debugging or analysis
             inputText: ""
             useInput: true
-          visualData: 657/686/270/null//
-        '[zMtcVap6NISx4LW8nQsZA]:graphInput "Graph Input"':
+          outgoingConnections:
+            - output->"Graph Output" q6yqfaGAnOFT1i1DVK_vk/value
+          visualData: 593/452/270/null//
+        '[ULru_0SIWltmCnL85ajJH]:graphInput "Graph Input"':
           data:
             dataType: string
-            defaultValue: Suhail
             id: input
             useDefaultValueInput: false
           outgoingConnections:
-            - data->"Graph Output" 0f0gHpRg7dMqWCZhu72tg/value
-            - data->"Intermediate Output" hZiaPiLBkQybX-wQG2NKd/input
-          visualData: 474/409/330/null//
+            - data->"Intermediate Output" 3ObTy2HSSd5soe7fEP6lF/input
+          visualData: 461/288/330/null//
+        '[q6yqfaGAnOFT1i1DVK_vk]:graphOutput "Graph Output"':
+          data:
+            dataType: string
+            id: output
+          visualData: 1025/515/330/null//
   metadata:
     description: ""
-    id: E0WcQ1ErDiPsiqzdnSlIh
-    title: suhail
+    id: lucxcyIPQDuIeg7Fg9c0P
+    title: Suhail-test
   plugins:
     - id: rivet-intermediate-output@latest
       package: rivet-intermediate-output

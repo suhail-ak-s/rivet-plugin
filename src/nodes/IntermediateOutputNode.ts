@@ -47,7 +47,7 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
       inputs.push({
         id: "input" as PortId,
         title: "Input",
-        dataType: "string",
+        dataType: "any",
         required: false
       });
       return inputs;
@@ -58,7 +58,7 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
       outputs.push({
         id: "output" as PortId,
         title: "Output",
-        dataType: "string"
+        dataType: "any"
       });
       return outputs;
     },
@@ -95,21 +95,15 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
     ): Promise<Outputs> {
       const inputPort = "input" as PortId;
       const outputPort = "output" as PortId;
-      const input = (inputData[inputPort]?.value as string) ?? data.inputText;
+      const input = inputData[inputPort] ?? { type: "string", value: data.inputText };
       
-      // Use context's partial output instead of console.log
+      // Pass through the partial outputs as is
       const partialOutputs: Outputs = {};
-      partialOutputs[outputPort] = {
-        type: "string",
-        value: input
-      };
+      partialOutputs[outputPort] = input;
       context.onPartialOutputs?.(partialOutputs);
 
       const outputs: Outputs = {};
-      outputs[outputPort] = {
-        type: "string",
-        value: input
-      };
+      outputs[outputPort] = input;
       return outputs;
     }
   };

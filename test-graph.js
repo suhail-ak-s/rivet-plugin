@@ -8,7 +8,7 @@ RivetCore.globalRivetNodeRegistry.registerPlugin(intermediateOutputPlugin(RivetC
 async function testGraph() {
   try {
     const result = await runGraphInFile("./MasterAgent.rivet", {
-      graph: "jZDbKoqXeqOgJo1EhumeF",
+      graph: "qlSqPyEleqPj8D9pcfIAJ",
       inputs: {
         input: "What is the weather in Tokyo?",
       },

@@ -1,6 +1,6 @@
 {
   "name": "rivet-intermediate-output",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Rivet plugin for capturing and displaying intermediate outputs for debugging and analysis",
   "type": "module",
   "main": "dist/bundle.js",
