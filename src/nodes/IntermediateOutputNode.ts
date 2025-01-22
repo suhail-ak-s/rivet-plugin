@@ -20,6 +20,7 @@ export type IntermediateOutputNodeData = {
   inputText: string;
   useInput?: boolean;
   description?: string;
+  useForSubgraphOutput?: boolean;
 };
 
 export function intermediateOutputNode(rivet: typeof Rivet) {
@@ -32,7 +33,8 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
         data: {
           inputText: "",
           useInput: true,
-          description: "Captures intermediate output for debugging or analysis"
+          description: "Captures intermediate output for debugging or analysis",
+          useForSubgraphOutput: true
         },
         visualData: {
           x: 0,
@@ -78,6 +80,11 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
           type: "string",
           dataKey: "description",
           label: "Description (document what this output captures)"
+        },
+        {
+          type: "toggle",
+          dataKey: "useForSubgraphOutput",
+          label: "Use for subgraph partial output"
         }
       ];
     },
@@ -85,7 +92,8 @@ export function intermediateOutputNode(rivet: typeof Rivet) {
     getBody(data): string | NodeBodySpec | NodeBodySpec[] | undefined {
       const description = data.description ? `Description: ${data.description}` : '';
       const value = data.inputText ? `Value: ${data.inputText}` : '';
-      return [description, value].filter(Boolean).join('\n');
+      const subgraphOutput = data.useForSubgraphOutput ? '(Used for subgraph output)' : '';
+      return [description, value, subgraphOutput].filter(Boolean).join('\n');
     },
 
     async process(
